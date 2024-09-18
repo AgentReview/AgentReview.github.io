@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="description"
+        content=""> -->
+  <meta name="keywords" content="Peer Review, Large Language Models, Agent Simulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGENTREVIEW: Exploring Academic Peer Review with LLM Agents</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <link rel="stylesheet", href="./static/css/indented_listing.css"
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://ahren09.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <!-- <a class="navbar-item" href="">
+            xxx
+          </a> -->
+          <a class="navbar-item" href="https://arxiv.org/abs/2310.17512">
+            CompeteAI
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">AGENTREVIEW: Exploring Academic Peer Review with LLM Agents</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ahren09.github.io/">Yiqiao Jin</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/icecream-and-tea">Qinlin Zhao</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="">Yiyang Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://github.com/Hhhhhhao">Hao Chen</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://immortalise.github.io/">Kaijie Zhu</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Yijia Xiao</a><sup>5</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jd92.wang/">Jindong Wang</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Georgia Institute of Technology,</span>
+            <span class="author-block"><sup>2</sup>Microsoft Research Asia,</span>
+            <span class="author-block"><sup>3</sup>Carnegie Mellon University,</span>
+            <span class="author-block"><sup>4</sup>University of California, Santa Barbara,</span>
+            <span class="author-block"><sup>5</sup>University of California, Los Angeles</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.12708"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.12708"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/AgentReview/AgentReview"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://AgentReview.github.io"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-window-maximize"></i>
+                  </span>
+                  <span>Website</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Peer review is a cornerstone of academic publishing, ensuring the integrity, novelty, and accuracy of published research. However, peer review faces challenges such as <i>reviewer biases</i>, <i>inconsistent assessments</i>, and <i>concerns regarding the design of review mechanisms</i>. These issues can obscure the fairness and integrity of scientific evaluation, especially given the increasing volume of academic submissions.
+          </p>
+          <p>
+            To address these issues, traditional studies in peer review often focus on <strong>statistical analyses of past reviews</strong>, which struggle to fully capture the <strong>multivariate nature</strong> of peer review -- entangled factors like reviewer expertise, motivation, and bias contribute jointly to the review results, making them difficult to study in isolation. Moreover, <strong>ethical and privacy issues</strong> around investigating real-world peer review data further complicate the exploration of real-world peer review data.
+          </p>
+          <p>
+            In our <a href="https://arxiv.org/abs/2406.12708">recent work</a>, we introduce <strong>AgentReview</strong>, the first large language model (LLM)-based framework designed to simulate the peer review process. 
+            <strong>AgentReview</strong> allows for the controlled simulation of peer review dynamics using LLM agents, enabling researchers to explore biases, reviewer roles, and decision mechanisms in a way that respects privacy while providing actionable insights into how the peer review process can be improved.
+          </p> 
+        </div>
+
+        <div class="has-text-centered">
+          <img src="./static/images/Overview.png"
+               alt="Overview of AgentReview."/>
+          <p>
+            Figure 1: <strong>AgentReview</strong> is an open and flexible framework designed to realistically simulate the peer review process. It enables controlled experiments to <i>disentangle</i> multiple variables in peer review, allowing for an in-depth examination of their effects on review outcomes.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Agent Review. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">AgentReview</h2>
+        
+        <!-- Introduction. -->
+        <div class="content has-text-justified">
+          <p>
+            <strong> AgentReview </strong> provides a flexible and extensible testbed for studying the impact of different roles and decision mechanisms in peer review. It follows procedures of popular Natural Language Processing (NLP) and Machine Learning (ML) conferences. 
+          </p>
+          <p>
+            The framework simulates the roles of reviewers, authors, and Area Chairs (ACs) as LLM agents, allowing us to observe how different various configurations lead to different simulation results.
+          </p>
+        </div>
+
+
+        <!-- Key Roles in AgentReview. -->
+        <h3 class="title is-4">Key Roles in AgentReview</h3>
+
+        <p> 
+          <strong>AgentReview</strong> integrates three roles—reviewers, authors, and ACs—all powered by LLM agents.
+        </p>
+
+        <div class="text-spacing"></div>
+
+        <div class="list1">
+        <ol>
+          <li><strong>Reviewers</strong> are modeled based on three key attributes:</li>
+          <ul>
+            <li><strong>Commitment</strong> measures the reviewer's dedication and sense of responsibility. (<em>responsible</em> vs. <em>irresponsible</em> reviewers)</li>
+            <li><strong>Intention</strong> describes the motivation behind the reviews, i.e. whether the reviewer genuinely helps authors improve their papers. (<em>benign</em> vs. <em>malicious</em> reviewers)</li>
+            <li><strong>Knowledgeability</strong> measures the reviewer's expertise in the manuscript's subject area. (<em>knowledgeable</em> vs. <em>unknowledgeable</em> reviewers)</li>
+          </ul>
+          <li><strong>Area Chairs (ACs)</strong> are responsible for final decisions. We categorize ACs into three styles:</li>
+          <ul>
+            <li><strong>Authoritarian</strong> ACs prioritize their own evaluations over the collective input from reviewers;</li>
+            <li><strong>Conformist</strong> ACs rely heavily on other reviewers' evaluations, minimizing their own influence;</li>
+            <li><strong>Inclusive</strong> ACs consider all available discussion and feedback, including reviews, author rebuttals, and reviewer comments, for final decisions.</li>
+          </ul>
+        </ol>
+        </div>
+        <!--/ Key Roles in AgentReview. -->
+
+        <div class="text-spacing"></div>
+
+        <!-- Peer Preview Process Pipeline. -->
+
+        <h3 class="title is-4">Peer Review Process Pipeline</h3>
+
+        <div class="column is-10 has-text-centered">
+          <img src="./static/images/Review_Pipeline.png"
+               alt="Review Pipeline."/>
+          <p>
+            Figure 2: The Pipeline for AgentReview.
+          </p>
+        </div>
+
+        <div class="text-spacing"></div>
+        
+        <div>
+          <p>Our simulation adopts a structured, 5-phase pipeline:</p>
+          <div class="text-spacing"></div>
+          <div class="list2">
+          <ol>
+            <li>
+              <span class="phase-title">Reviewer Assessment.</span>
+              <span class="phase-description"> Each manuscript is evaluated by three reviewers independently.</span>
+            </li>
+            <li>
+              <span class="phase-title">Author-Reviewer Discussion.</span>
+              <span class="phase-description"> Authors submit rebuttals to address reviewers' concerns.</span>
+            </li>
+            <li>
+              <span class="phase-title">Reviewer-AC Discussion.</span>
+              <span class="phase-description"> The AC facilitates discussions among reviewers, prompting updates to their initial assessments.</span>
+            </li>
+            <li>
+              <span class="phase-title">Meta-Review Compilation.</span>
+              <span class="phase-description"> The AC synthesizes the discussions into a meta-review.</span>
+            </li>
+            <li>
+              <span class="phase-title">Paper Decision.</span>
+              <span class="phase-description"> The AC makes the final decision on whether to accept or reject the paper, based on all gathered inputs.</span>
+            </li>
+          </ol>
+        </div>
+          <p>
+            We adopt a fixed acceptance rate of 32%, corresponding to the actual average acceptance rate for ICLR 2020 -- 2023.
+          </p>
+        </div>
+
+        <!--/ Peer Preview Process Pipeline. -->
+
+      </div>
+    </div>
+    <!--/ Agent Review. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Insights from Peer Review Simulations. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Insights from Peer Review Simulations</h2>
+          
+          <!-- Introduction. -->
+          <div class="column is-20 has-text-centered">
+            <img style="width: 90%;" src="./static/images/Accept_Reject_Reasons_Distribution.png"
+                  alt="Distribution of Reasons to Accept and Reject."/>
+            <p>
+              Figure 3: Distribution of Reasons to Accept and Reject.
+            </p>
+          </div>
+
+          <div class="content has-text-justified">
+            <p>
+              We use <strong>AgentReview</strong> to simulate peer review process using real conference papers from ICLR 2020 to 2023, and explore several sociological theories that explain how multiple factors affect peer review outcomes.
+            </p>
+          </div>
+
+
+          <!-- Social Influence. -->
+          <h3 class="title is-4">Social Influence</h3>
+
+          <div class="content has-text-justified">
+            <p> 
+              <strong>Social Influence Theory</strong> suggests that individuals in a group tend to revise their beliefs towards a common viewpoint. In <strong>AgentReview</strong>, we observe that reviewers often align their ratings with their peers during the rebuttal phase (<i>Phase III. Reviewer-Author Discussion</i>), leading to a 27.2% decrease in the standard deviation of ratings. 
+            </p>
+          </div>
+
+          <div class="column is-20 has-text-centered">
+            <img style="width: 70%;" src="./static/images/Average_Ratings_Biased_Reviewers.png"
+                  alt="Average Ratings with Varying Numbers of Biased Reviewers."/>
+          </div>
+          <!--/ Social Influence. -->
+
+          <div class="text-spacing"></div>
+
+          <!-- Altruism Fatigue and Peer Effect. -->
+          <h3 class="title is-4">Altruism Fatigue and Peer Effect</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              Paper review is typically unpaid and time-consuming. <strong>Altruism Fatigue</strong> describes how this demanding nature of peer review can lead to superficial assessments when reviewers feel their efforts go unrecognized. Including just one _irresponsible_ reviewer led to an 18.7% drop in engagement during the Reviewer-AC discussion phase, as reviewers provided shorter, less detailed feedback.
+            </p>
+          </div>
+          <!--/ Altruism Fatigue and Peer Effect. -->
+
+          <!-- Groupthink and Echo Chamber Effects. -->
+          <h3 class="title is-4">Groupthink and Echo Chamber Effects</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              When biased reviewers dominate discussions, <strong>Groupthink</strong> can occur, where a group of individuals reaches a consensus without critical reasoning or evaluation of a manuscript. Biased reviewers often reinforce each other's negative opinions during <i></i>Phase III. Reviewer-AC discussion</i>. resulting in a 0.17 drop in ratings among the biased reviewers. This can also cause a <strong>spillover effect</strong>, where their negativity influences the assessments of unbiased reviewers, ultimately causing a 0.25 decrease in overall ratings.
+            </p>
+          </div>
+          <!--/ Groupthink and Echo Chamber Effects. -->
+
+          <!-- Authority Bias. -->
+          <h3 class="title is-4">Authority Bias</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              Reviewers may give more favorable ratings to papers from well-known authors. When reviewers were aware of the authors' identities, paper decisions changed by 27.7%, highlighting how prestige can unjustly influence the review process.
+            </p>
+          </div>
+          
+          <div class="column is-20 has-text-centered">
+            <img style="width: 50%;" src="./static/images/Average_Rating_Famous_Author.png"
+                  alt="Average Ratings When Varying Numbers of Reviewers are Aware of the Authors' Identities."/>
+          </div>
+            <!--/ Authority Bias. -->
+        
+          <!--/ Insights from Peer Review Simulations. -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Insights from Peer Review Simulations. -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Implications for the Future of Peer Review</h2>
+
+          <!-- Towards Better Design of Peer Review Systems. -->
+          <h3 class="title is-4">Towards Better Design of Peer Review Systems</h3>
+
+          <div class="content has-text-justified">
+            <p> 
+              AgentReview offers key insights into latent factors like bias, expertise, and motivation, helping design more equitable and efficient peer review systems. Future processes could incorporate better checks for reviewer expertise and commitment to reduce biases and move towards more equitable, transparent, and efficient peer review processes.
+            </p>
+          </div>
+          <!--/ Towards Better Design of Peer Review Systems. -->
+
+          <!-- Addressing Privacy Concerns with Simulation. -->
+          <h3 class="title is-4">Addressing Privacy Concerns with Simulation</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              By simulating the peer review process, <strong>AgentReview</strong> ensures privacy and ethical standards without accessing sensitive real-world data, allowing for large-scale studies that respect reviewer anonymity while offering actionable insights into improving peer review mechanisms.
+            </p>
+          </div>
+          <!--/ Addressing Privacy Concerns with Simulation. -->
+
+          <!-- Adaptive Peer Review Mechanisms. -->
+          <h3 class="title is-4">Adaptive Peer Review Mechanisms</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              <strong>AgentReview</strong>'s simulations enable adaptive mechanisms, such as adjusting the number of reviewers or the process length based on a paper’s complexity. This flexibility maintains rigor while streamlining the review process.
+            </p>
+          </div>
+          <!--/ Adaptive Peer Review Mechanisms. -->
+
+          <!-- Cross-Disciplinary Insights. -->
+          <h3 class="title is-4">Cross-Disciplinary Insights</h3>
+
+          <div class="content has-text-justified">
+            <p>
+              <strong>AgentReview</strong> can simulate peer review dynamics in interdisciplinary fields, identifying challenges where reviewers from different domains evaluate the same paper. These insights could help design better processes for interdisciplinary journals, ensuring fair, balanced assessments.
+            </p>
+          </div>
+            <!--/ Cross-Disciplinary Insights. -->
+        
+          <!--/ Implications for the Future of Peer Review. -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Conclusion</h2>
+        <div class="content has-text-justified">
+          <p>
+            <strong>AgentReview</strong> marks significant progress in understanding peer review dynamics. Through LLM-driven simulations, we reveal how biases, expertise, and social factors impact academic evaluations. These insights lay the groundwork for enhancing the fairness and integrity of peer review.
+          </p>
+          <p>
+            <strong>Call to Action:</strong> We encourage researchers, editors, and policymakers to explore AGENTREVIEW’s findings and consider how AI can help create a more transparent and equitable academic publishing process.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{jin2024agentreviewexploringpeerreview,
+      title={AgentReview: Exploring Peer Review Dynamics with LLM Agents}, 
+      author={Yiqiao Jin and Qinlin Zhao and Yiyang Wang and Hao Chen and Kaijie Zhu and Yijia Xiao and Jindong Wang},
+      year={2024},
+      eprint={2406.12708},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2406.12708}, 
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2406.12708">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://ahren09.github.io/" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://AgentReview.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
